@@ -9,7 +9,8 @@ const Board = () => {
 
   // called everytime the board changes
   useEffect(() => {
-    if (checkRows(board) || checkColumns(board)) setWinner(currentPlayer);
+    if (checkRows(board) || checkColumns() || checkDiagonals())
+      setWinner(currentPlayer);
     else if (checkTie()) setWinner(0);
     else setCurrentPlayer(-currentPlayer);
 
@@ -35,6 +36,17 @@ const Board = () => {
     return checkRows(transposed);
   };
 
+  const checkDiagonals = () => {
+    const len = board.length;
+    let d1 = true,
+      d2 = true;
+    for (let i = 0; i < len; i++) {
+      d1 = d1 && board[0][0] === board[i][i];
+      d2 = d2 && board[0][len - 1] === board[i][len - 1 - i];
+    }
+    return (d1 && board[0][0]) || (d2 && board[0][len - 1]);
+  };
+
   const checkTie = () => {
     return !board.some((row) => row.some((item) => item === 0));
   };
@@ -57,7 +69,7 @@ const Board = () => {
   const resetBoard = () => {
     setBoard(Array(3).fill(template));
     setWinner(null);
-    setCurrentPlayer(1);
+    setCurrentPlayer(-1);
   };
 
   return (
