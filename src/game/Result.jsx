@@ -11,10 +11,10 @@ const Result = (props) => {
   return (
     <section
       id="result"
-      class="w-full flex-grow flex flex-col justify-center items-center"
+      className="w-full flex-grow flex flex-col justify-center items-center"
     >
-      <div class="mb-4">
-        <b class="text-lg">{winnerName()}</b>
+      <div className="mb-4">
+        <b className="text-lg">{winnerName()}</b>
       </div>
       <div>
         <button
